@@ -1,26 +1,29 @@
 #page-room {
   header {
     border-bottom: 1px solid var(--gray-150);
-    padding: 24px;
+    padding: 1.5em;
 
     .content {
       align-items: center;
       display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
       justify-content: space-between;
       max-width: 1128px;
       margin: 0 auto;
 
       > img {
-        max-height: 45px;
+        max-height: 2.8125em;
       }
 
       > div {
         align-items: center;
         display: flex;
-        gap: 16px;
+        flex-wrap: wrap;
+        gap: 1em;
 
         button {
-          height: 40px;
+          height: 2.5em;
         }
       }
     }
@@ -29,15 +32,16 @@
   main {
     margin: 0 auto;
     max-width: 800px;
+    padding: 0 1.5em;
 
     .room-title {
       align-items: center;
       display: flex;
-      margin: 32px 0 24px;
+      margin: 2em 0 1.5em;
 
       h1 {
         font-family: var(--title-font);
-        font-size: 24px;
+        font-size: 1.5em;
         color: var(--gray-800);
       }
 
@@ -45,10 +49,11 @@
         color: var(--light-color);
         background: var(--secondary-color);
         border-radius: 9999px;
-        font-size: 14px;
+        flex-shrink: 0;
+        font-size: .875em;
         font-weight: 500;
-        margin-left: 16px;
-        padding: 8px 16px;
+        margin-left: 1em;
+        padding: .5em 1em;
       }
     }
 
@@ -58,8 +63,8 @@
         border: 0;
         border-radius: 8px;
         box-shadow: 0 2px 12px rgba(0, 0, 0, .04);
-        min-height: 130px;
-        padding: 16px;
+        min-height: 8.125em;
+        padding: 1em;
         resize: vertical;
         width: 100%;
       }
@@ -68,15 +73,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: 16px;
+        margin-top: 1em;
 
         .user-info {
           display: flex;
           align-items: center;
 
           img {
-            width: 32px;
-            height: 32px;
+            width: 2em;
+            height: 2em;
             border-radius: 50%;
           }
 
@@ -84,12 +89,12 @@
             margin-left: 8px;
             color: var(--gray-800);
             font-weight: 500;
-            font-size: 14px;
+            font-size: .875em;
           }
         }
 
         span {
-          font-size: 14px;
+          font-size: .875em;
           color: var(--gray-300);
           font-weight: 500;
 
@@ -98,7 +103,7 @@
             border: 0;
             color: var(--primary-color);
             text-decoration: underline;
-            font-size: 14px;
+            font-size: .875em;
             font-weight: 500;
             cursor: pointer;
           }
@@ -107,7 +112,7 @@
     }
 
     .question-list {
-      margin-top: 32px;
+      margin-top: 2em;
     }
   }
 }

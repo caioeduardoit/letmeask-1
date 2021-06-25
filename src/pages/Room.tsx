@@ -1,5 +1,5 @@
-import { useHistory, useParams } from 'react-router-dom';
-import { FormEvent, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
 
 import { database } from '../services/firebase';
 import { Button } from '../components/Button';
@@ -17,22 +17,12 @@ type RoomParams = {
 }
 
 export function Room() {
-  const history = useHistory();
   const { user } = useAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
   
   const roomId = params.id;
-  const { title, questions, isClosed } = useRoom(roomId);
-
-  useEffect(() => {
-    const hasLoadedRoomInfo = isClosed !== undefined;
-
-    if (isClosed && hasLoadedRoomInfo) {
-      alert('Room already closed.');
-      return history.push(`/`)
-    }
-  }, [roomId, history, isClosed]);
+  const { title, questions } = useRoom(roomId);
 
   async function handleSendQuestion(e: FormEvent) {
     e.preventDefault();

@@ -22,11 +22,23 @@
   --google-brand-color: #ea4335;
 }
 
+@media (max-width: 1080px) {
+  html {
+    font-size: 93.75%; // 15px
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%; // 14px
+  }
+}
+
 body {
   background: var(--gray-100);
   color: #292929;
 }
 
 body, input, button, textarea {
-  font: 400 16px var(--primary-font);
+  font: 400 1em var(--primary-font);
 }
