@@ -1,0 +1,132 @@
+.page-auth {
+  align-items: stretch;
+  display: flex;
+  height: 100vh;
+
+  aside {
+    background: var(--primary-color);
+    color: var(--light-color);
+    display: flex;
+    flex-direction: column;
+    flex: 7;
+    justify-content: center;
+    padding: 120px 80px;
+
+    img {
+      max-width: 320px;
+    }
+
+    strong {
+      font: 700 36px var(--title-font);
+      line-height: 42px;
+      margin-top: 16px;
+    }
+
+    p {
+      color: var(--gray-100);
+      font-size: 24px;
+      line-height: 32px;
+      margin-top: 16px;
+    }
+  }
+
+  main {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex: 8;
+    padding: 0 32px;
+  }
+
+  .main-content {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    max-width: 320px;
+    text-align: center;
+    width: 100%;
+
+    > img {
+      align-self: center;
+    }
+
+    h2 {
+      font-family: var(--title-font);
+      font-size: 24px;
+      margin: 64px 0 24px;
+    }
+
+    form {
+      input {
+        background: var(--light-color);
+        border: 1px solid var(--gray-200);
+        border-radius: 8px;
+        height: 50px;
+        padding: 0 16px;
+      }
+
+      button {
+        margin: 16px 0 0 0;
+      }
+
+      button, input {
+        width: 100%;
+      }
+    }
+
+    p {
+      color: var(--gray-300);
+      font-size: 14px;
+      margin-top: 16px;
+
+      a {
+        color: var(--secondary-color);
+      }
+    }
+  }
+
+  .create-room {
+    align-items: center;
+    background: var(--google-brand-color);
+    border: 0;
+    border-radius: 8px;
+    color: var(--light-color);
+    cursor: pointer;
+    display: flex;
+    font-weight: 500;
+    height: 50px; 
+    justify-content: center;
+    margin-top: 64px;
+    transition: filter .2s;
+
+    img {
+      margin: 0 8px 0 0;
+    }
+
+    &:hover {
+      filter: brightness(.9);
+    }
+  }
+
+  .separator {
+    align-items: center;
+    font-size: 14px;
+    color: var(--gray-200);
+    display: flex;
+    margin: 32px 0;
+
+    &::before,
+    &::after {
+      background: var(--gray-200);
+      content: '';
+      flex: 1;
+      height: 1px;
+      margin-right: 16px;
+    }
+
+    &::after {
+      margin-left: 16px;
+      margin-right: 0;
+    }
+  }
+}
