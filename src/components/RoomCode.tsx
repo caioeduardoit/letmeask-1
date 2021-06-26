@@ -4,22 +4,26 @@ import '../styles/room-code.scss';
 
 type RoomCodeProps = {
   code: string;
-}
+};
 
-export function RoomCode(props: RoomCodeProps) {
-  const origin = window.location.origin;
+export function RoomCode({ code }: RoomCodeProps): JSX.Element {
+  const { origin } = window.location;
 
   function copyRoomCodeToClipboard() {
-    navigator.clipboard.writeText(`${origin}/rooms/${props.code}`);
+    navigator.clipboard.writeText(`${origin}/rooms/${code}`);
   }
 
   return (
-    <button className="room-code" onClick={copyRoomCodeToClipboard}>
+    <button
+      type="button"
+      className="room-code"
+      onClick={copyRoomCodeToClipboard}
+    >
       <div>
         <img src={copyImg} alt="Copy room code" />
       </div>
 
-      <span>Sala #{props.code}</span>
+      <span>Sala #{code}</span>
     </button>
   );
 }

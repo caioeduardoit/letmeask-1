@@ -5,43 +5,45 @@ type User = {
   id: string;
   name: string;
   avatar: string;
-}
+};
 
 type AuthContextType = {
   user: User | undefined;
   signInWithGoogle: () => Promise<void>;
-}
+};
 
 type AuthContextProviderProps = {
   children: ReactNode;
-}
+};
 
 export const AuthContext = createContext({} as AuthContextType);
 
-export function AuthContextProvider({ children }: AuthContextProviderProps) {
+export function AuthContextProvider({
+  children,
+}: AuthContextProviderProps): JSX.Element {
   const [user, setUser] = useState<User>();
-  
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        const { displayName, photoURL, uid } = user;
+    const unsubscribe = auth.onAuthStateChanged(userInfo => {
+      if (userInfo) {
+        const { displayName, photoURL, uid } = userInfo;
 
         if (!displayName || !photoURL) {
           throw new Error('Missing information from Google Acount.');
         }
-  
+
         setUser({
           id: uid,
           name: displayName,
           avatar: photoURL,
-        })
+        });
       }
-    })
+    });
 
     return () => {
       unsubscribe();
-    }
-  }, [])
+    };
+  }, []);
 
   async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -59,7 +61,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
         id: uid,
         name: displayName,
         avatar: photoURL,
-      })
+      });
     }
   }
 

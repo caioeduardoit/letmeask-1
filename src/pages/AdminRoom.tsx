@@ -1,4 +1,4 @@
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { database } from '../services/firebase';
 import { useRoom } from '../hooks/useRoom';
@@ -15,12 +15,12 @@ import '../styles/room.scss';
 
 type RoomParams = {
   id: string;
-}
+};
 
-export function AdminRoom() {
+export function AdminRoom(): JSX.Element {
   const history = useHistory();
   const params = useParams<RoomParams>();
-  
+
   const roomId = params.id;
   const { title, questions } = useRoom(roomId);
 
@@ -28,11 +28,12 @@ export function AdminRoom() {
     await database.ref(`rooms/${roomId}`).update({
       endedAt: new Date(),
     });
-    
+
     history.push('/');
   }
 
   async function handleDeleteQuestion(questionId: string) {
+    // eslint-disable-next-line no-alert
     if (window.confirm('Tem certeza que deseja excluir esta pergunta?')) {
       await database.ref(`rooms/${roomId}/questions/${questionId}`).remove();
     }
@@ -54,11 +55,15 @@ export function AdminRoom() {
     <div id="page-room">
       <header>
         <div className="content">
-          <img src={logoImg} alt="Logo da Letmeask" />
+          <Link to="/">
+            <img src={logoImg} alt="Logo da Letmeask" />
+          </Link>
 
           <div>
             <RoomCode code={roomId} />
-            <Button onClick={handleEndRoom} isOutlined>Encerrar sala</Button>
+            <Button onClick={handleEndRoom} isOutlined>
+              Encerrar sala
+            </Button>
           </div>
         </div>
       </header>
@@ -67,11 +72,11 @@ export function AdminRoom() {
         <div className="room-title">
           <h1>Sala {title}</h1>
 
-          { questions.length > 0 && <span>{questions.length} pergunta(s)</span> }
+          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
         <div className="question-list">
-          { questions.map(question => (
+          {questions.map(question => (
             <Question
               key={question.id}
               content={question.content}

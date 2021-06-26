@@ -1,35 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { database } from "../services/firebase";
-import { useAuth } from "./useAuth";
+import { database } from '../services/firebase';
+import { useAuth } from './useAuth';
 
 type QuestionType = {
   id: string;
   author: {
     name: string;
     avatar: string;
-  }
+  };
   content: string;
   isAnswered: boolean;
   isHighlighted: boolean;
   likeCount: number;
   likeId: string | undefined;
-}
+};
 
-type FirebaseQuestions = Record<string, {
-  author: {
-    name: string;
-    avatar: string;
+type FirebaseQuestions = Record<
+  string,
+  {
+    author: {
+      name: string;
+      avatar: string;
+    };
+    content: string;
+    isAnswered: boolean;
+    isHighlighted: boolean;
+    likes: Record<
+      string,
+      {
+        authorId: string;
+      }
+    >;
   }
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
-  likes: Record<string, {
-    authorId: string;
-  }>
-}>
+>;
 
-export function useRoom(roomId: string) {
+type UseRoomReturn = {
+  questions: QuestionType[];
+  title: string;
+};
+
+export function useRoom(roomId: string): UseRoomReturn {
   const { user } = useAuth();
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState('');
@@ -41,19 +52,23 @@ export function useRoom(roomId: string) {
       const databaseRoom = room.val();
       const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
 
-      const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
-        const likesAsArray = Object.values(value.likes ?? {});
+      const parsedQuestions = Object.entries(firebaseQuestions).map(
+        ([key, value]) => {
+          const likesAsArray = Object.values(value.likes ?? {});
 
-        return {
-          id: key,
-          content: value.content,
-          author: value.author,
-          isAnswered: value.isAnswered,
-          isHighlighted: value.isHighlighted,
-          likeCount: likesAsArray.length,
-          likeId: Object.entries(value.likes ?? {}).find(([ key, { authorId } ]) => authorId === user?.id)?.[0],
+          return {
+            id: key,
+            content: value.content,
+            author: value.author,
+            isAnswered: value.isAnswered,
+            isHighlighted: value.isHighlighted,
+            likeCount: likesAsArray.length,
+            likeId: Object.entries(value.likes ?? {}).find(
+              ([, { authorId }]) => authorId === user?.id
+            )?.[0],
+          };
         }
-      });
+      );
 
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
@@ -61,7 +76,7 @@ export function useRoom(roomId: string) {
       return () => {
         roomRef.off('value');
       };
-    })
+    });
   }, [roomId, user?.id]);
 
   return { questions, title };

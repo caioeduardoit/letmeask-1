@@ -12,7 +12,7 @@ type QuestionProps = {
   isAnswered: boolean;
   isHighlighted: boolean;
   children?: ReactNode;
-}
+};
 
 export function Question({
   content,
@@ -20,13 +20,13 @@ export function Question({
   isAnswered = false,
   isHighlighted = false,
   children,
-}: QuestionProps) {
+}: QuestionProps): JSX.Element {
   return (
     <div
       className={cx(
         'question',
         { answered: isAnswered },
-        { highlighted: isHighlighted && !isAnswered },
+        { highlighted: isHighlighted && !isAnswered }
       )}
     >
       <p>{content}</p>
@@ -37,9 +37,7 @@ export function Question({
           <span>{author.name}</span>
         </div>
 
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </footer>
     </div>
   );

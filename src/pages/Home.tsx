@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../hooks/useAuth';
@@ -11,7 +11,7 @@ import googleIconImg from '../assets/images/google-icon.svg';
 
 import '../styles/auth.scss';
 
-export function Home() {
+export function Home(): JSX.Element {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState('');
@@ -26,7 +26,7 @@ export function Home() {
       if (!pathname) {
         return setRoomCode(inputValue);
       }
-      
+
       const codeStrippedFromPathname = pathname.split('/')[2];
 
       return setRoomCode(codeStrippedFromPathname);
@@ -53,12 +53,14 @@ export function Home() {
     const roomRef = await database.ref(`rooms/${roomCode}`).get();
 
     if (!roomRef.exists()) {
+      // eslint-disable-next-line no-alert
       alert('Room does not exists.');
       return;
     }
 
     if (roomRef.val().endedAt) {
-      alert('Room already closed.')
+      // eslint-disable-next-line no-alert
+      alert('Room already closed.');
       return;
     }
 
@@ -66,9 +68,12 @@ export function Home() {
   }
 
   return (
-    <div className='page-auth'>
+    <div className="page-auth">
       <aside>
-        <img src={illustrationImg} alt='Ilustração simbolizando perguntas e respostas' />
+        <img
+          src={illustrationImg}
+          alt="Ilustração simbolizando perguntas e respostas"
+        />
         <div className="app-copy">
           <strong>Crie salas de Q&amp;A ao-vivo</strong>
           <p>Tire as dúvidas da sua audiência em tempo-real</p>
@@ -76,8 +81,8 @@ export function Home() {
       </aside>
 
       <main>
-        <div className='main-content'>
-          <img src={logoImg} alt='Letmeask' />
+        <div className="main-content">
+          <img src={logoImg} alt="Letmeask" />
 
           <div className="app-copy">
             <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -85,27 +90,25 @@ export function Home() {
           </div>
 
           <button
-            className='create-room'
+            className="create-room"
             onClick={handleCreateRoom}
-            type='button'
+            type="button"
           >
-            <img src={googleIconImg} alt='Logo do Google' />
+            <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google
           </button>
 
-          <div className='separator'>ou entre em uma sala</div>
+          <div className="separator">ou entre em uma sala</div>
 
           <form onSubmit={e => handleJoinRoom(e)}>
             <input
-              type='text'
-              placeholder='Digite o código da sala'
+              type="text"
+              placeholder="Digite o código da sala"
               onChange={e => handleCodeInputChange(e)}
               value={roomCode}
             />
 
-            <Button type='submit'>
-              Entrar na sala
-            </Button>
+            <Button type="submit">Entrar na sala</Button>
           </form>
         </div>
       </main>
