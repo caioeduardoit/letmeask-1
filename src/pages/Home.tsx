@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { useAuth } from '../hooks/useAuth';
@@ -15,6 +15,25 @@ export function Home() {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState('');
+
+  function handleCodeInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const inputValue = e.target.value;
+    const isUrl = inputValue.indexOf('/rooms/') !== -1;
+
+    if (isUrl) {
+      const { pathname } = new URL(inputValue);
+
+      if (!pathname) {
+        return setRoomCode(inputValue);
+      }
+      
+      const codeStrippedFromPathname = pathname.split('/')[2];
+
+      return setRoomCode(codeStrippedFromPathname);
+    }
+
+    return setRoomCode(inputValue);
+  }
 
   async function handleCreateRoom() {
     if (!user) {
@@ -80,7 +99,7 @@ export function Home() {
             <input
               type='text'
               placeholder='Digite o código da sala'
-              onChange={e => setRoomCode(e.target.value)}
+              onChange={e => handleCodeInputChange(e)}
               value={roomCode}
             />
 

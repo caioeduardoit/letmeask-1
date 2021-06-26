@@ -8,6 +8,15 @@
   cursor: pointer;
   display: flex;
   white-space: nowrap;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+
+    div {
+      background-color: #6948ca;
+    }
+  }
   
   div {
     background: var(--primary-color);

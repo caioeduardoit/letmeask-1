@@ -7,8 +7,10 @@ type RoomCodeProps = {
 }
 
 export function RoomCode(props: RoomCodeProps) {
+  const origin = window.location.origin;
+
   function copyRoomCodeToClipboard() {
-    navigator.clipboard.writeText(props.code);
+    navigator.clipboard.writeText(`${origin}/rooms/${props.code}`);
   }
 
   return (
