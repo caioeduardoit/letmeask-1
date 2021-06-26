@@ -2,15 +2,18 @@ import { useParams, Link } from 'react-router-dom';
 import { FormEvent, useState } from 'react';
 
 import { database } from '../services/firebase';
+import { useAuth } from '../hooks/useAuth';
+import { useRoom } from '../hooks/useRoom';
+import { useTheme } from '../hooks/useTheme';
+import { ToogleTheme } from '../components/ToogleTheme';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { Question } from '../components/Question';
 
 import logoImg from '../assets/images/logo.svg';
-import { useAuth } from '../hooks/useAuth';
+import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
 
 import '../styles/room.scss';
-import { useRoom } from '../hooks/useRoom';
 
 type RoomParams = {
   id: string;
@@ -18,6 +21,7 @@ type RoomParams = {
 
 export function Room(): JSX.Element {
   const { user } = useAuth();
+  const { theme } = useTheme();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState('');
 
@@ -71,10 +75,17 @@ export function Room(): JSX.Element {
       <header>
         <div className="content">
           <Link to="/">
-            <img src={logoImg} alt="Logo da Letmeask" />
+            {theme === 'light' ? (
+              <img src={logoImg} alt="Letmeask" />
+            ) : (
+              <img src={logoDarkImg} alt="Letmeask" />
+            )}
           </Link>
 
-          <RoomCode code={roomId} />
+          <div>
+            <RoomCode code={roomId} />
+            <ToogleTheme />
+          </div>
         </div>
       </header>
 

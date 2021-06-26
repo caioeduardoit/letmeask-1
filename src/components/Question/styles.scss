@@ -23,6 +23,7 @@
 
   p {
     color: var(--gray-800);
+    line-height: 1.618;
   }
 
   footer {
@@ -78,5 +79,25 @@
         }
       }
     }
+  }
+}
+
+.dark .question {
+  background: #333333;
+
+  &.highlighted {
+    background: #150f19;
+
+    footer .user-info span {
+      color: var(--gray-800);
+    }
+  }
+
+  &.answered {
+    opacity: .2;
+  }
+
+  p {
+    color: var(--gray-200);
   }
 }

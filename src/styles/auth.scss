@@ -1,5 +1,6 @@
 .page-auth {
   align-items: stretch;
+  background: var(--background-default);
   display: flex;
   min-height: 100vh;
 
@@ -29,7 +30,7 @@
     }
 
     p {
-      color: var(--gray-100);
+      color: var(--light-color);
       font-size: 1.5em;
       line-height: 1.3;
       margin-top: 1em;
@@ -56,12 +57,15 @@
     align-items: stretch;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    justify-content: center;
     max-width: 320px;
     text-align: center;
     width: 100%;
 
     > img {
       align-self: center;
+      max-width: 150px;
     }
 
     .app-copy {
@@ -78,9 +82,10 @@
     }
 
     h2 {
+      color: var(--gray-800);
       font-family: var(--title-font);
       font-size: 1.5em;
-      margin: 4em 0 1.5em;
+      margin: 2em 0 1.5em;
     }
 
     form {
@@ -154,6 +159,22 @@
     &::after {
       margin-left: 1em;
       margin-right: 0;
+    }
+  }
+
+  footer {
+    margin: 2em 0 0 0;
+
+    .toogle-theme {
+      margin: 1em 0 0 0;
+    }
+  }
+}
+
+.dark {
+  .main-content {
+    .app-copy {
+      color: var(--gray-800);
     }
   }
 }

@@ -1,12 +1,15 @@
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 import { useRoom } from '../hooks/useRoom';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { Question } from '../components/Question';
+import { ToogleTheme } from '../components/ToogleTheme';
 
 import logoImg from '../assets/images/logo.svg';
+import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
 import deleteImg from '../assets/images/delete.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
@@ -20,6 +23,7 @@ type RoomParams = {
 export function AdminRoom(): JSX.Element {
   const history = useHistory();
   const params = useParams<RoomParams>();
+  const { theme } = useTheme();
 
   const roomId = params.id;
   const { title, questions } = useRoom(roomId);
@@ -56,14 +60,21 @@ export function AdminRoom(): JSX.Element {
       <header>
         <div className="content">
           <Link to="/">
-            <img src={logoImg} alt="Logo da Letmeask" />
+            {theme === 'light' ? (
+              <img src={logoImg} alt="Letmeask" />
+            ) : (
+              <img src={logoDarkImg} alt="Letmeask" />
+            )}
           </Link>
 
           <div>
             <RoomCode code={roomId} />
+
             <Button onClick={handleEndRoom} isOutlined>
               Encerrar sala
             </Button>
+
+            <ToogleTheme />
           </div>
         </div>
       </header>

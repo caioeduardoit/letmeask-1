@@ -1,12 +1,15 @@
 import { FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { database } from '../services/firebase';
+import { useTheme } from '../hooks/useTheme';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '../components/Button';
-import { database } from '../services/firebase';
+import { ToogleTheme } from '../components/ToogleTheme';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
+import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
 
 import '../styles/auth.scss';
@@ -14,6 +17,7 @@ import '../styles/auth.scss';
 export function Home(): JSX.Element {
   const history = useHistory();
   const { user, signInWithGoogle } = useAuth();
+  const { theme } = useTheme();
   const [roomCode, setRoomCode] = useState('');
 
   function handleCodeInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -82,7 +86,11 @@ export function Home(): JSX.Element {
 
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          {theme === 'light' ? (
+            <img src={logoImg} alt="Letmeask" />
+          ) : (
+            <img src={logoDarkImg} alt="Letmeask" />
+          )}
 
           <div className="app-copy">
             <strong>Crie salas de Q&amp;A ao-vivo</strong>
@@ -110,6 +118,10 @@ export function Home(): JSX.Element {
 
             <Button type="submit">Entrar na sala</Button>
           </form>
+
+          <footer>
+            <ToogleTheme>Tema</ToogleTheme>
+          </footer>
         </div>
       </main>
     </div>

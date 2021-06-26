@@ -36,3 +36,12 @@
     white-space: nowrap;
   }
 }
+
+.dark .room-code {
+  background: transparent;
+  color: var(--gray-300);
+
+  &:hover {
+    background: var(--primary-color);
+  }
+}

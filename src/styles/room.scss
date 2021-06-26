@@ -1,4 +1,7 @@
 #page-room {
+  background: var(--background-default);
+  min-height: 100vh;
+
   header {
     border-bottom: 1px solid var(--gray-150);
     padding: 1.5em;
@@ -13,7 +16,7 @@
       margin: 0 auto;
 
       a img {
-        max-height: 2.8125em;
+        width: 6em;
       }
 
       > div {
@@ -113,6 +116,18 @@
 
     .question-list {
       margin-top: 2em;
+    }
+  }
+}
+
+.dark #page-room {
+  header {
+    border-color: #383838;
+  }
+
+  form {
+    textarea {
+      background: var(--light-color);
     }
   }
 }

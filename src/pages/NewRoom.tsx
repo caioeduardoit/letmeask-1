@@ -1,17 +1,21 @@
 import { Link, useHistory } from 'react-router-dom';
 import { useState, FormEvent } from 'react';
 
-import { Button } from '../components/Button';
 import { database } from '../services/firebase';
 import { useAuth } from '../hooks/useAuth';
+import { useTheme } from '../hooks/useTheme';
+import { Button } from '../components/Button';
+import { ToogleTheme } from '../components/ToogleTheme';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
+import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
 
 import '../styles/auth.scss';
 
 export function NewRoom(): JSX.Element {
   const history = useHistory();
+  const { theme } = useTheme();
   const { user } = useAuth();
   const [newRoomName, setNewRoomName] = useState('');
 
@@ -47,7 +51,11 @@ export function NewRoom(): JSX.Element {
 
       <main>
         <div className="main-content">
-          <img src={logoImg} alt="Letmeask" />
+          {theme === 'light' ? (
+            <img src={logoImg} alt="Letmeask" />
+          ) : (
+            <img src={logoDarkImg} alt="Letmeask" />
+          )}
 
           <h2>Criar uma nova sala</h2>
 
@@ -65,6 +73,10 @@ export function NewRoom(): JSX.Element {
           <p>
             Quer entrar em uma sala existente? <Link to="/">Clique aqui</Link>.
           </p>
+
+          <footer>
+            <ToogleTheme>Tema</ToogleTheme>
+          </footer>
         </div>
       </main>
     </div>
