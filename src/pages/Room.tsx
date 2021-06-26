@@ -9,6 +9,7 @@ import { ToogleTheme } from '../components/ToogleTheme';
 import { Button } from '../components/Button';
 import { RoomCode } from '../components/RoomCode';
 import { Question } from '../components/Question';
+import { SocialShare } from '../components/SocialShare';
 
 import logoImg from '../assets/images/logo.svg';
 import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
@@ -93,7 +94,12 @@ export function Room(): JSX.Element {
         <div className="room-title">
           <h1>Sala {title}</h1>
 
-          {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
+          {questions.length > 0 && (
+            <div>
+              <span>{questions.length} pergunta(s)</span>
+              <SocialShare roomId={roomId} roomName={title} />
+            </div>
+          )}
         </div>
 
         <form onSubmit={handleSendQuestion}>

@@ -13,8 +13,10 @@ import logoDarkImg from '../assets/images/logo-letmeask-dt.svg';
 import deleteImg from '../assets/images/delete.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
+import emptyQuestions from '../assets/images/empty-questions.svg';
 
 import '../styles/room.scss';
+import { SocialShare } from '../components/SocialShare';
 
 type RoomParams = {
   id: string;
@@ -79,49 +81,68 @@ export function AdminRoom(): JSX.Element {
         </div>
       </header>
 
-      <main>
+      <main className={`${questions.length > 0 ? '' : 'main--is-empty'}`}>
         <div className="room-title">
           <h1>Sala {title}</h1>
 
           {questions.length > 0 && <span>{questions.length} pergunta(s)</span>}
         </div>
 
-        <div className="question-list">
-          {questions.map(question => (
-            <Question
-              key={question.id}
-              content={question.content}
-              author={question.author}
-              isAnswered={question.isAnswered}
-              isHighlighted={question.isHighlighted}
-            >
-              {!question.isAnswered && (
-                <>
-                  <button
-                    type="button"
-                    onClick={() => handleCheckQuestionAsAnswered(question.id)}
-                  >
-                    <img src={checkImg} alt="Marcar pergunta como respondida" />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => handleHighlightQuestion(question.id)}
-                  >
-                    <img src={answerImg} alt="Dar destaque a pergunta" />
-                  </button>
-                </>
-              )}
-
-              <button
-                type="button"
-                onClick={() => handleDeleteQuestion(question.id)}
+        {questions.length > 0 ? (
+          <div className="question-list">
+            {questions.map(question => (
+              <Question
+                key={question.id}
+                content={question.content}
+                author={question.author}
+                isAnswered={question.isAnswered}
+                isHighlighted={question.isHighlighted}
               >
-                <img src={deleteImg} alt="Remover pergunta" />
-              </button>
-            </Question>
-          ))}
-        </div>
+                {!question.isAnswered && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleCheckQuestionAsAnswered(question.id)}
+                    >
+                      <img
+                        src={checkImg}
+                        alt="Marcar pergunta como respondida"
+                      />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => handleHighlightQuestion(question.id)}
+                    >
+                      <img src={answerImg} alt="Dar destaque a pergunta" />
+                    </button>
+                  </>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => handleDeleteQuestion(question.id)}
+                >
+                  <img src={deleteImg} alt="Remover pergunta" />
+                </button>
+              </Question>
+            ))}
+          </div>
+        ) : (
+          <div className="question-list question-empty">
+            <>
+              <img src={emptyQuestions} alt="Sem perguntas ainda" />
+              <h3>Nenhuma pergunta por aqui</h3>
+              <p>
+                Envie o código desta sala para seus amigos e comece a responder
+                perguntas!
+              </p>
+              <footer>
+                <SocialShare roomId={roomId} roomName={title} />
+              </footer>
+            </>
+          </div>
+        )}
       </main>
     </div>
   );
