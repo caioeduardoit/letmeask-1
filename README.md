@@ -16,6 +16,31 @@
 
 <br>
 
+## 🧑‍🚀 Próximo Nível
+
+Como parte do evento, os alunos são encorajados a levarem as aplicações ao próximo nível adicionando novos elementos, linguagens e features. No meu caso executei as seguintes adições:
+### Mudanças maiores
+* Adicionado responsividade a aplicação por meio de media queries básicas e sass.
+* Adicionado opção de tema dark, fazendo uso da context api e hooks do react, css variables e persistindo escolha do usuário através do localstorage.
+* Integração do projeto com eslint e prettier.
+
+### Novas funcionalidades
+* Os códigos das salas agora são copiados com toda a URL da página ao invés de somente o código.
+* O input inicial para entrar na sala aceita uma URL completa transformando-a em código.
+* Componente de compartilhamento social, onde admins e usuários podem compartilhar sala com maior facilidade.
+
+### Mudanças menores
+* Adicionado link para home no logo nas páginas internas do app.
+* Desenvolvida a tela mostrando que não existem perguntas.
+* Ao criar a sala o administrador é redirecionado para parte de administração.
+* CSS Variables para controlar cores na maior parte do projeto.
+
+## 🧪 Demonstração Online
+
+O projeto está disponibilizado [aqui](https://letmeask-23a1c.web.app/) através do serviço de deploy e hosting da Firebase.
+
+Fique a vontade para testar a aplicação e dar feedbacks.
+
 ## 🧪 Tecnologias
 
 Esse projeto foi desenvolvido com as seguintes tecnologias:
@@ -50,25 +75,6 @@ Lembrando que será necessário criar uma conta no [Firebase](https://firebase.g
 Letmeask é perfeito para criadores de conteúdos poderem criar salas de Q&A com o seu público, de uma forma muito organizada e democrática. 
 
 Este é um projeto desenvolvido durante a **[Next Level Week Together](https://nextlevelweek.com/)**, apresentada dos dias 20 a 27 de Junho de 2021.
-
-## 🧑‍🚀 Próximo Nível
-
-Como parte do evento, os alunos são encorajados a levarem as aplicações ao próximo nível adicionando novos elementos, linguagens e features. No meu caso executei as seguintes adições:
-### Mudanças maiores
-* Adicionado responsividade a aplicação por meio de media queries básicas e sass.
-* Adicionado opção de tema dark, fazendo uso da context api e hooks do react, css variables e persistindo escolha do usuário através do localstorage.
-* Integração do projeto com eslint e prettier.
-
-### Novas funcionalidades
-* Os códigos das salas agora são copiados com toda a URL da página ao invés de somente o código.
-* O input inicial para entrar na sala aceita uma URL completa transformando-a em código.
-* Componente de compartilhamento social, onde admins e usuários podem compartilhar sala com maior facilidade.
-
-### Mudanças menores
-* Adicionado link para home no logo nas páginas internas do app.
-* Desenvolvida a tela mostrando que não existem perguntas.
-* Ao criar a sala o administrador é redirecionado para parte de administração.
-* CSS Variables para controlar cores na maior parte do projeto.
 
 ## 🔖 Layout
 
